@@ -22,9 +22,11 @@ public class SmartBankingApp {
         final String ERROR_MSG = String.format("\t%s%s%s\n", COLOR_RED_BOLD, "%s", RESET);
         final String SUCCESS_MSG = String.format("\t%s%s%s\n", COLOR_GREEN_BOLD, "%s", RESET);
 
-        String[] accountNumbers = new String[0];
-        String[] customerNames = new String[0];
-        Double[] accountBalance = new Double[0];
+        String[][] bankClients=new String[0][];
+
+        // String[] accountNumbers = new String[0];
+        // String[] customerNames = new String[0];
+        // Double[] accountBalance = new Double[0];
 
         String screen = DASHBOARD;
         int i = 1;
