@@ -175,13 +175,17 @@ public class SmartBankingApp {
                     initialAccountBalanceDouble = Double.parseDouble(initialAccountBalance);
                     System.out.printf("\tDeposited: " + "%s%,.2f", "Rs.", initialAccountBalanceDouble);
 
-                    String[] newAccountNumbers = new String[accountNumbers.length + 1];
-                    String[] newCustomerNames = new String[customerNames.length + 1];
-                    Double[] newAccountBalances = new Double[accountBalance.length + 1];
-                    for (int j = 0; j < accountNumbers.length; j++) {
-                        newAccountNumbers[j] = accountNumbers[j];
-                        newCustomerNames[j] = customerNames[j];
-                        newAccountBalances[j] = accountBalance[j];
+                    // String[] newAccountNumbers = new String[accountNumbers.length + 1];
+                    // String[] newCustomerNames = new String[customerNames.length + 1];
+                    // Double[] newAccountBalances = new Double[accountBalance.length + 1];
+
+                    String[][] tempBankClients = new String[bankClients.length+1][3];
+                    for (int j = 0; j < bankClients.length; j++) {
+
+
+                        // newAccountNumbers[j] = accountNumbers[j];
+                        // newCustomerNames[j] = customerNames[j];
+                        // newAccountBalances[j] = accountBalance[j];
                     }
                     newAccountNumbers[newAccountNumbers.length - 1] = id;
                     newCustomerNames[newAccountNumbers.length - 1] = name;
