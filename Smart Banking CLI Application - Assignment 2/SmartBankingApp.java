@@ -181,7 +181,7 @@ public class SmartBankingApp {
 
                     String[][] tempBankClients = new String[bankClients.length+1][3];
                     for (int j = 0; j < bankClients.length; j++) {
-
+                            tempBankClients[j]=bankClients[j];
 
                         // newAccountNumbers[j] = accountNumbers[j];
                         // newCustomerNames[j] = customerNames[j];
