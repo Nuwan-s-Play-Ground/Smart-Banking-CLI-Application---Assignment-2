@@ -200,7 +200,9 @@ public class SmartBankingApp {
                     tempBankClients[tempBankClients.length-1][1]=name;
                     tempBankClients[tempBankClients.length-1][2]=initialAccountBalanceDouble+"";
 
-                    
+                    /* Let's swap arrays' memory locations*/
+                    bankClients=tempBankClients;
+                
 
                     System.out.println();
                     System.out.printf(SUCCESS_MSG,
