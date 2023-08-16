@@ -187,12 +187,20 @@ public class SmartBankingApp {
                         // newCustomerNames[j] = customerNames[j];
                         // newAccountBalances[j] = accountBalance[j];
                     }
-                    newAccountNumbers[newAccountNumbers.length - 1] = id;
-                    newCustomerNames[newAccountNumbers.length - 1] = name;
-                    newAccountBalances[newAccountNumbers.length - 1] = initialAccountBalanceDouble;
-                    accountNumbers = newAccountNumbers;
-                    customerNames = newCustomerNames;
-                    accountBalance = newAccountBalances;
+
+                    // newAccountNumbers[newAccountNumbers.length - 1] = id;
+                    // newCustomerNames[newAccountNumbers.length - 1] = name;
+                    // newAccountBalances[newAccountNumbers.length - 1] = initialAccountBalanceDouble;
+                    // accountNumbers = newAccountNumbers;
+                    // customerNames = newCustomerNames;
+                    // accountBalance = newAccountBalances;
+
+                    /*Lets add new clients */
+                    tempBankClients[tempBankClients.length-1][0]=id;
+                    tempBankClients[tempBankClients.length-1][1]=name;
+                    tempBankClients[tempBankClients.length-1][2]=initialAccountBalanceDouble+"";
+
+                    
 
                     System.out.println();
                     System.out.printf(SUCCESS_MSG,
