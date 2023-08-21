@@ -313,7 +313,91 @@ public class SmartBankingApp {
                 SCANNER.nextLine(); // Wait for user to press Enter
                 screen = DASHBOARD;
                 break;
-
+                
+                case TRANSFER:
+                System.out.print("\nEnter Source Account ID: ");
+                String sourceAccountId = SCANNER.nextLine().strip();
+            
+                boolean sourceAccountFound = false;
+                String[] sourceClient = null;
+                for (String[] client : bankClients) {
+                    if (client[0].equalsIgnoreCase(sourceAccountId)) {
+                        sourceAccountFound = true;
+                        sourceClient = client;
+                        break;
+                    }
+                }
+            
+                if (!sourceAccountFound) {
+                    System.out.printf(ERROR_MSG, "Source Account not found");
+                    System.out.print("\nPress Enter to continue...");
+                    SCANNER.nextLine(); // Wait for user to press Enter
+                    screen = DASHBOARD;
+                    break;
+                }
+            
+                System.out.print("\nEnter Destination Account ID: ");
+                String destinationAccountId = SCANNER.nextLine().strip();
+            
+                boolean destinationAccountFound = false;
+                String[] destinationClient = null;
+                for (String[] client : bankClients) {
+                    if (client[0].equalsIgnoreCase(destinationAccountId)) {
+                        destinationAccountFound = true;
+                        destinationClient = client;
+                        break;
+                    }
+                }
+            
+                if (!destinationAccountFound) {
+                    System.out.printf(ERROR_MSG, "Destination Account not found");
+                    System.out.print("\nPress Enter to continue...");
+                    SCANNER.nextLine(); // Wait for user to press Enter
+                    screen = DASHBOARD;
+                    break;
+                }
+            
+                System.out.printf("\nSource Account Holder: %s\n", sourceClient[1]);
+                System.out.printf("Source Current Balance: Rs.%,.2f\n", Double.parseDouble(sourceClient[2]));
+            
+                System.out.printf("\nDestination Account Holder: %s\n", destinationClient[1]);
+                System.out.printf("Destination Current Balance: Rs.%,.2f\n", Double.parseDouble(destinationClient[2]));
+            
+                double transferAmount = 0;
+                boolean validTransfer = false;
+            
+                do {
+                    System.out.print("Enter Transfer Amount: Rs.");
+                    try {
+                        transferAmount = Double.parseDouble(SCANNER.nextLine().strip());
+                        double sourceBalance = Double.parseDouble(sourceClient[2]);
+                        if (transferAmount <= 0) {
+                            System.out.printf(ERROR_MSG, "Amount must be greater than 0");
+                        } else if (transferAmount > sourceBalance) {
+                            System.out.printf(ERROR_MSG, "Insufficient balance in source account");
+                        } else {
+                            validTransfer = true;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.printf(ERROR_MSG, "Invalid input. Please enter a valid number");
+                    }
+                } while (!validTransfer);
+            
+                double updatedSourceBalance = Double.parseDouble(sourceClient[2]) - transferAmount;
+                sourceClient[2] = String.valueOf(updatedSourceBalance);
+            
+                double updatedDestinationBalance = Double.parseDouble(destinationClient[2]) + transferAmount;
+                destinationClient[2] = String.valueOf(updatedDestinationBalance);
+            
+                System.out.printf(SUCCESS_MSG, "Transfer successful");
+                System.out.printf("Updated Source Balance: Rs.%,.2f\n", updatedSourceBalance);
+                System.out.printf("Updated Destination Balance: Rs.%,.2f\n", updatedDestinationBalance);
+            
+                System.out.print("\nPress Enter to continue...");
+                SCANNER.nextLine(); // Wait for user to press Enter
+                screen = DASHBOARD;
+                break;
+            
 
             }
             
