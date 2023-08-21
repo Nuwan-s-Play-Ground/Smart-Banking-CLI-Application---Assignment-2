@@ -217,8 +217,56 @@ public class SmartBankingApp {
                     break;
                     
                 case DEPOSIT:
+                
+                System.out.print("\nEnter Account ID: ");
+                String depositAccountId = SCANNER.nextLine().strip();
+
+                boolean accountFound = false;
+                for (String[] client : bankClients) {
+                    if (client[0].equalsIgnoreCase(depositAccountId)) {
+                        accountFound = true;
+
+                        System.out.printf("\nAccount Holder: %s\n", client[1]);
+                        System.out.printf("Current Balance: Rs.%,.2f\n", Double.parseDouble(client[2]));
+
+                        double depositAmount=0;
+                        boolean validDeposit = false;
+
+                        do {
+                            System.out.print("Enter Deposit Amount: Rs.");
+                            try {
+                                depositAmount = Double.parseDouble(SCANNER.nextLine().strip());
+                                if (depositAmount <= 0) {
+                                    System.out.printf(ERROR_MSG, "Amount must be greater than 0");
+                                } else {
+                                    validDeposit = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.printf(ERROR_MSG, "Invalid input. Please enter a valid number");
+                            }
+                        } while (!validDeposit);
+
+                        double updatedBalance = Double.parseDouble(client[2]) + depositAmount;
+                        client[2] = String.valueOf(updatedBalance);
+
+                        System.out.printf(SUCCESS_MSG, "Deposit successful");
+                        System.out.printf("Updated Balance: Rs.%,.2f\n", updatedBalance);
+                        break;
+                    }
+                }
+
+                if (!accountFound) {
+                    System.out.printf(ERROR_MSG, "Account not found");
+                }
+
+                System.out.print("\nPress Enter to continue...");
+                SCANNER.nextLine(); // Wait for user to press Enter
+                screen = DASHBOARD;
+                break;
+
 
             }
+            
 
         } while (true);
 
