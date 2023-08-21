@@ -399,7 +399,7 @@ public class SmartBankingApp {
                 break;
            
                 case PRINT_STATEMENT:
-                
+
                 System.out.print("\nEnter Account ID: ");
                 String statementAccountId = SCANNER.nextLine().strip();
             
@@ -434,6 +434,49 @@ public class SmartBankingApp {
                 screen = DASHBOARD;
                 break;
             
+                case DELETE_ACCOUNT:
+
+                System.out.print("\nEnter Account ID to Delete: ");
+                String deleteAccountId = SCANNER.nextLine().strip();
+
+                boolean accountFoundDelete = false;
+                int deleteAccountIndex = -1;
+                for (int index = 0; index < bankClients.length; index++) {
+                    if (bankClients[index][0].equalsIgnoreCase(deleteAccountId)) {
+                        accountFoundDelete = true;
+                        deleteAccountIndex = index;
+                        break;
+                    }
+                }
+
+                if (!accountFoundDelete) {
+                    System.out.printf(ERROR_MSG, "Account not found");
+                    System.out.print("\nPress Enter to continue...");
+                    SCANNER.nextLine(); // Wait for user to press Enter
+                    screen = DASHBOARD;
+                    break;
+                }
+
+                // Perform the account deletion logic
+             
+                if (deleteAccountIndex >= 0) {
+                    tempBankClients = new String[bankClients.length - 1][3];
+                    int destIndex = 0;
+                    for (int srcIndex = 0; srcIndex < bankClients.length; srcIndex++) {
+                        if (srcIndex != deleteAccountIndex) {
+                            tempBankClients[destIndex] = bankClients[srcIndex];
+                            destIndex++;
+                        }
+                    }
+                    bankClients = tempBankClients;
+                }
+
+                System.out.printf(SUCCESS_MSG, "Account deleted successfully");
+                System.out.print("\nPress Enter to continue...");
+                SCANNER.nextLine(); // Wait for user to press Enter
+                screen = DASHBOARD;
+                break;
+
 
             }
             
