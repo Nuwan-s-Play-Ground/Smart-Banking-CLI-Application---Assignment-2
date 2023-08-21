@@ -264,9 +264,60 @@ public class SmartBankingApp {
                 screen = DASHBOARD;
                 break;
 
+                case WITHDRAWAL:
+                System.out.print("\nEnter Account ID: ");
+                String withdrawalAccountId = SCANNER.nextLine().strip();
+
+                boolean accountFoundWithdrawal = false;
+                for (String[] client : bankClients) {
+                    if (client[0].equalsIgnoreCase(withdrawalAccountId)) {
+                        accountFoundWithdrawal = true;
+
+                        System.out.printf("\nAccount Holder: %s\n", client[1]);
+                        System.out.printf("Current Balance: Rs.%,.2f\n", Double.parseDouble(client[2]));
+
+                        double withdrawalAmount = 0;
+                        boolean validWithdrawal = false;
+
+                        do {
+                            System.out.print("Enter Withdrawal Amount: Rs.");
+                            try {
+                                withdrawalAmount = Double.parseDouble(SCANNER.nextLine().strip());
+                                double currentBalance = Double.parseDouble(client[2]);
+                                if (withdrawalAmount <= 0) {
+                                    System.out.printf(ERROR_MSG, "Amount must be greater than 0");
+                                } else if (withdrawalAmount > currentBalance) {
+                                    System.out.printf(ERROR_MSG, "Insufficient balance");
+                                } else {
+                                    validWithdrawal = true;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.printf(ERROR_MSG, "Invalid input. Please enter a valid number");
+                            }
+                        } while (!validWithdrawal);
+
+                        double updatedBalanceWithdrawal = Double.parseDouble(client[2]) - withdrawalAmount;
+                        client[2] = String.valueOf(updatedBalanceWithdrawal);
+
+                        System.out.printf(SUCCESS_MSG, "Withdrawal successful");
+                        System.out.printf("Updated Balance: Rs.%,.2f\n", updatedBalanceWithdrawal);
+                        break;
+                    }
+                }
+
+                if (!accountFoundWithdrawal) {
+                    System.out.printf(ERROR_MSG, "Account not found");
+                }
+
+                System.out.print("\nPress Enter to continue...");
+                SCANNER.nextLine(); // Wait for user to press Enter
+                screen = DASHBOARD;
+                break;
+
 
             }
             
+
 
         } while (true);
 
