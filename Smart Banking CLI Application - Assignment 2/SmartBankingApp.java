@@ -397,6 +397,42 @@ public class SmartBankingApp {
                 SCANNER.nextLine(); // Wait for user to press Enter
                 screen = DASHBOARD;
                 break;
+           
+                case PRINT_STATEMENT:
+                
+                System.out.print("\nEnter Account ID: ");
+                String statementAccountId = SCANNER.nextLine().strip();
+            
+                boolean statementAccountFound = false;
+                String[] statementClient = null;
+                for (String[] client : bankClients) {
+                    if (client[0].equalsIgnoreCase(statementAccountId)) {
+                        statementAccountFound = true;
+                        statementClient = client;
+                        break;
+                    }
+                }
+            
+                if (!statementAccountFound) {
+                    System.out.printf(ERROR_MSG, "Account not found");
+                    System.out.print("\nPress Enter to continue...");
+                    SCANNER.nextLine(); // Wait for user to press Enter
+                    screen = DASHBOARD;
+                    break;
+                }
+            
+                System.out.printf("\nAccount Holder: %s\n", statementClient[1]);
+                System.out.printf("Account ID: %s\n", statementClient[0]);
+                System.out.printf("Current Balance: Rs.%,.2f\n", Double.parseDouble(statementClient[2]));
+            
+                System.out.println("\nTransaction History:");
+                // Add logic here to display the transaction history for the selected account
+                // For instance, you can maintain a separate data structure to store transaction history
+            
+                System.out.print("\nPress Enter to continue...");
+                SCANNER.nextLine(); // Wait for user to press Enter
+                screen = DASHBOARD;
+                break;
             
 
             }
