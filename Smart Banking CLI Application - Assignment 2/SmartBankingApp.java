@@ -209,7 +209,7 @@ public class SmartBankingApp {
 
                     System.out.println();
                     System.out.printf(SUCCESS_MSG,
-                            String.format("%s:%s has been Created successfully", id, name));
+                            String.format("%s:%s has been created successfully", id, name));
                     System.out.print("\tDo you want to continue adding (Y/n)? ");
                     if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
                         continue;
@@ -217,6 +217,12 @@ public class SmartBankingApp {
                     break;
                     
                 case DEPOSIT:
+
+                // System.out.println("Contents of bankClients array:");
+                // for (String[] client : bankClients) {
+                //     System.out.printf("ID: %s, Name: %s, Balance: %s%n", client[0], client[1], client[2]);
+                // }
+
                 
                 System.out.print("\nEnter Account ID: ");
                 String depositAccountId = SCANNER.nextLine().strip();
@@ -480,8 +486,6 @@ public class SmartBankingApp {
 
             }
             
-
-
         } while (true);
 
     }
