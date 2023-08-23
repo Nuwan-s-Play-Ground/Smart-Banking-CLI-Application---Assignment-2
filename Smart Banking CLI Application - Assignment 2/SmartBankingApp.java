@@ -48,7 +48,7 @@ public class SmartBankingApp {
                     System.out.printf("\t[4]. %s\n", TRANSFER);
                     System.out.printf("\t[5]. %s\n", PRINT_STATEMENT);
                     System.out.printf("\t[6]. %s\n", DELETE_ACCOUNT);
-                    System.out.printf("\t[7]. %s\n", "Exsit");
+                    System.out.printf("\t[7]. %s\n", "Exit");
                     System.out.print("\tEnter an option to continue: ");
                     int option = SCANNER.nextInt();
                     SCANNER.nextLine();
@@ -210,7 +210,7 @@ public class SmartBankingApp {
                     System.out.println();
                     System.out.printf(SUCCESS_MSG,
                             String.format("%s:%s has been created successfully", id, name));
-                    System.out.print("\tDo you want to continue adding (Y/n)? ");
+                    System.out.print("\tDo you want to continue  (Y/n)? ");
                     if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
                         continue;
                     screen = DASHBOARD;
@@ -223,7 +223,6 @@ public class SmartBankingApp {
                 //     System.out.printf("ID: %s, Name: %s, Balance: %s%n", client[0], client[1], client[2]);
                 // }
 
-                
                 System.out.print("\nEnter Account ID: ");
                 String depositAccountId = SCANNER.nextLine().strip();
 
@@ -265,8 +264,9 @@ public class SmartBankingApp {
                     System.out.printf(ERROR_MSG, "Account not found");
                 }
 
-                System.out.print("\nPress Enter to continue...");
-                SCANNER.nextLine(); // Wait for user to press Enter
+               System.out.print("\tDo you want to continue (Y/n)? ");
+                if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
+                    continue;
                 screen = DASHBOARD;
                 break;
 
@@ -290,9 +290,11 @@ public class SmartBankingApp {
                             try {
                                 withdrawalAmount = Double.parseDouble(SCANNER.nextLine().strip());
                                 double currentBalance = Double.parseDouble(client[2]);
-                                if (withdrawalAmount <= 0) {
-                                    System.out.printf(ERROR_MSG, "Amount must be greater than 0");
-                                } else if (withdrawalAmount > currentBalance) {
+                                if (withdrawalAmount <= 100) {
+                                    System.out.printf(ERROR_MSG, "Amount must be greater than 100");
+                                } else if (((currentBalance-withdrawalAmount)<=500)) {
+                                    System.out.printf(ERROR_MSG, "Insufficient balance.After withdrawal account balance should be greater than Rs.500");
+                                } else if(withdrawalAmount > currentBalance ){
                                     System.out.printf(ERROR_MSG, "Insufficient balance");
                                 } else {
                                     validWithdrawal = true;
@@ -315,10 +317,11 @@ public class SmartBankingApp {
                     System.out.printf(ERROR_MSG, "Account not found");
                 }
 
-                System.out.print("\nPress Enter to continue...");
-                SCANNER.nextLine(); // Wait for user to press Enter
-                screen = DASHBOARD;
-                break;
+                System.out.print("\tDo you want to continue (Y/n)? ");
+                    if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
+                        continue;
+                    screen = DASHBOARD;
+                    break;
                 
                 case TRANSFER:
                 System.out.print("\nEnter Source Account ID: ");
@@ -365,10 +368,10 @@ public class SmartBankingApp {
             
                 System.out.printf("\nSource Account Holder: %s\n", sourceClient[1]);
                 System.out.printf("Source Current Balance: Rs.%,.2f\n", Double.parseDouble(sourceClient[2]));
-            
+
                 System.out.printf("\nDestination Account Holder: %s\n", destinationClient[1]);
                 System.out.printf("Destination Current Balance: Rs.%,.2f\n", Double.parseDouble(destinationClient[2]));
-            
+                       
                 double transferAmount = 0;
                 boolean validTransfer = false;
             
@@ -399,8 +402,9 @@ public class SmartBankingApp {
                 System.out.printf("Updated Source Balance: Rs.%,.2f\n", updatedSourceBalance);
                 System.out.printf("Updated Destination Balance: Rs.%,.2f\n", updatedDestinationBalance);
             
-                System.out.print("\nPress Enter to continue...");
-                SCANNER.nextLine(); // Wait for user to press Enter
+                System.out.print("\tDo you want to continue (Y/n)? ");
+                if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
+                    continue;
                 screen = DASHBOARD;
                 break;
            
@@ -421,8 +425,10 @@ public class SmartBankingApp {
             
                 if (!statementAccountFound) {
                     System.out.printf(ERROR_MSG, "Account not found");
-                    System.out.print("\nPress Enter to continue...");
-                    SCANNER.nextLine(); // Wait for user to press Enter
+                    System.out.print("\tDo you want to continue (Y/n)? ");
+                    if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
+                    continue;
+                    SCANNER.nextLine(); 
                     screen = DASHBOARD;
                     break;
                 }
@@ -431,12 +437,10 @@ public class SmartBankingApp {
                 System.out.printf("Account ID: %s\n", statementClient[0]);
                 System.out.printf("Current Balance: Rs.%,.2f\n", Double.parseDouble(statementClient[2]));
             
-                System.out.println("\nTransaction History:");
-                // Add logic here to display the transaction history for the selected account
-                // For instance, you can maintain a separate data structure to store transaction history
             
-                System.out.print("\nPress Enter to continue...");
-                SCANNER.nextLine(); // Wait for user to press Enter
+                System.out.print("\tDo you want to continue (Y/n)? ");
+                if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
+                    continue;
                 screen = DASHBOARD;
                 break;
             
@@ -456,9 +460,9 @@ public class SmartBankingApp {
                 }
 
                 if (!accountFoundDelete) {
-                    System.out.printf(ERROR_MSG, "Account not found");
-                    System.out.print("\nPress Enter to continue...");
-                    SCANNER.nextLine(); // Wait for user to press Enter
+                    System.out.print("\tDo you want to continue (Y/n)? ");
+                    if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
+                        continue;
                     screen = DASHBOARD;
                     break;
                 }
@@ -478,8 +482,9 @@ public class SmartBankingApp {
                 }
 
                 System.out.printf(SUCCESS_MSG, "Account deleted successfully");
-                System.out.print("\nPress Enter to continue...");
-                SCANNER.nextLine(); // Wait for user to press Enter
+                System.out.print("\tDo you want to continue (Y/n)? ");
+                if (SCANNER.nextLine().strip().toUpperCase().equals("Y"))
+                    continue;
                 screen = DASHBOARD;
                 break;
 
