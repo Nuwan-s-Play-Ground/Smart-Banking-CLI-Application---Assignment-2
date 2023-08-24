@@ -392,7 +392,8 @@ public class SmartBankingApp {
                     }
                 } while (!validTransfer);
             
-                double updatedSourceBalance = Double.parseDouble(sourceClient[2]) - transferAmount;
+                double transferFee=transferAmount*0.02;
+                double updatedSourceBalance = Double.parseDouble(sourceClient[2]) - (transferAmount+transferFee);
                 sourceClient[2] = String.valueOf(updatedSourceBalance);
             
                 double updatedDestinationBalance = Double.parseDouble(destinationClient[2]) + transferAmount;
@@ -400,6 +401,8 @@ public class SmartBankingApp {
             
                 System.out.printf(SUCCESS_MSG, "Transfer successful");
                 System.out.printf("Updated Source Balance: Rs.%,.2f\n", updatedSourceBalance);
+                System.out.printf("Transfer Fee: Rs.%,.2f\n", transferFee);
+                System.out.println();
                 System.out.printf("Updated Destination Balance: Rs.%,.2f\n", updatedDestinationBalance);
             
                 System.out.print("\tDo you want to continue (Y/n)? ");
