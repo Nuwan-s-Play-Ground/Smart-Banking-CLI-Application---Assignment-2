@@ -226,6 +226,8 @@ public class SmartBankingApp {
                 System.out.print("\nEnter Account ID: ");
                 String depositAccountId = SCANNER.nextLine().strip();
 
+                // Checking previously added accounts
+
                 boolean accountFound = false;
                 for (String[] client : bankClients) {
                     if (client[0].equalsIgnoreCase(depositAccountId)) {
@@ -415,7 +417,8 @@ public class SmartBankingApp {
 
                 System.out.print("\nEnter Account ID: ");
                 String statementAccountId = SCANNER.nextLine().strip();
-            
+
+                //Checking previously added accounts
                 boolean statementAccountFound = false;
                 String[] statementClient = null;
                 for (String[] client : bankClients) {
